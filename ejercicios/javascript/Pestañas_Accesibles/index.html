@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pestañas accesibles</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border: 1px solid #999;
+      background-color: #ddd;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .tab-btn.activo {
+      background-color: #333;
+      color: white;
+      border-color: #333;
+    }
+
+    .tab-btn:focus {
+      outline: 3px solid #999;
+      outline-offset: 2px;
+    }
+
+    .tab-contenido {
+      display: none;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f5f5f5;
+    }
+
+    .tab-contenido.activo {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Pestañas profesionales accesibles</h2>
+
+  <div class="tabs" role="tablist" aria-label="Información del servicio">
+    <button
+      class="tab-btn activo"
+      id="tab-descripcion"
+      role="tab"
+      aria-selected="true"
+      aria-controls="panel-descripcion"
+      data-tab="descripcion"
+      tabindex="0"
+    >
+      Descripción
+    </button>
+
+    <button
+      class="tab-btn"
+      id="tab-opiniones"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-opiniones"
+      data-tab="opiniones"
+      tabindex="-1"
+    >
+      Opiniones
+    </button>
+
+    <button
+      class="tab-btn"
+      id="tab-contacto"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-contacto"
+      data-tab="contacto"
+      tabindex="-1"
+    >
+      Contacto
+    </button>
+  </div>
+
+  <div
+    class="tab-contenido activo"
+    id="panel-descripcion"
+    role="tabpanel"
+    aria-labelledby="tab-descripcion"
+  >
+    Aquí va la descripción del servicio o producto.
+  </div>
+
+  <div
+    class="tab-contenido"
+    id="panel-opiniones"
+    role="tabpanel"
+    aria-labelledby="tab-opiniones"
+    hidden
+  >
+    Aquí irían las opiniones de clientes.
+  </div>
+
+  <div
+    class="tab-contenido"
+    id="panel-contacto"
+    role="tabpanel"
+    aria-labelledby="tab-contacto"
+    hidden
+  >
+    Aquí irían los datos de contacto.
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll(".tab-btn");
+    const paneles = document.querySelectorAll(".tab-contenido");
+
+    function desactivarTodo() {
+      botones.forEach((boton) => {
+        boton.classList.remove("activo");
+        boton.setAttribute("aria-selected", "false");
+        boton.setAttribute("tabindex", "-1");
+      });
+
+      paneles.forEach((panel) => {
+        panel.classList.remove("activo");
+        panel.hidden = true;
+      });
+    }
+
+    function activarTab(botonActual) {
+      const valorTab = botonActual.dataset.tab;
+      const panelActivo = document.querySelector(
+        `#panel-${valorTab}`
+      );
+
+      desactivarTodo();
+
+      botonActual.classList.add("activo");
+      botonActual.setAttribute("aria-selected", "true");
+      botonActual.setAttribute("tabindex", "0");
+      botonActual.focus();
+
+      panelActivo.classList.add("activo");
+      panelActivo.hidden = false;
+    }
+
+    botones.forEach((boton) => {
+      boton.addEventListener("click", () => {
+        activarTab(boton);
+      });
+
+      boton.addEventListener("keydown", (e) => {
+        const arrayBotones = Array.from(botones);
+        const indiceActual = arrayBotones.indexOf(boton);
+        let nuevoIndice;
+
+        if (e.key === "ArrowRight") {
+          nuevoIndice = (indiceActual + 1) % arrayBotones.length;
+          activarTab(arrayBotones[nuevoIndice]);
+        }
+
+        if (e.key === "ArrowLeft") {
+          nuevoIndice = (indiceActual - 1 + arrayBotones.length) % arrayBotones.length;
+          activarTab(arrayBotones[nuevoIndice]);
+        }
+
+        if (e.key === "Home") {
+          activarTab(arrayBotones[0]);
+        }
+
+        if (e.key === "End") {
+          activarTab(arrayBotones[arrayBotones.length - 1]);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

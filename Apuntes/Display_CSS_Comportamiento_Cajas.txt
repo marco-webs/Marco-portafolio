@@ -1,0 +1,9 @@
+block: ocupa todo el ancho disponible, inicia en línea nueva. Acepta width/height, margin/padding verticales y horizontales.
+
+inline: fluye en la misma línea. No respeta width/height y el margin/padding vertical apenas afecta el flujo.
+
+inline-block: fluye en línea pero sí respeta width/height y márgenes.
+
+flex: distribuye hijos en fila/columna con alineación potente (el estándar moderno para layouts).
+
+(grid lo vemos justo después de flex, para no empachar.)

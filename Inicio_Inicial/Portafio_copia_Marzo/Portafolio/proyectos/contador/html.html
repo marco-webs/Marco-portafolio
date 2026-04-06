@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contador — HTML</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<nav class="mini-nav">
+  <a href="./index.html">Demo</a>
+  <a href="./css.html">Ver CSS</a>
+  <a href="./js.html">Ver JS</a>
+</nav>
+
+<main class="code-page">
+  <h1>HTML</h1>
+  <pre><code id="code"></code></pre>
+</main>
+
+<script>
+  fetch("./index.html")
+    .then(r => r.text())
+    .then(t => {
+      // Eliminar el bloque inyectado por Live Server
+      const limpio = t.replace(/<!-- Code injected by live-server -->[\s\S]*/i, "");
+      document.getElementById("code").textContent = limpio.trim();
+    })
+    .catch(() => {
+      document.getElementById("code").textContent = "No se pudo cargar index.html";
+    });
+</script>
+
+
+</body>
+</html>

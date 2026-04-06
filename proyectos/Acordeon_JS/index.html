@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acordeón dinámico</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .boton {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .boton:hover {
+      background-color: #555;
+    }
+
+    .contenido {
+      max-height: 0;
+      overflow: hidden;
+      background-color: #f0f0f0;
+      padding: 0 10px;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .contenido.activo {
+      max-height: 200px;
+      padding: 10px;
+    }
+
+    .volver {
+      display: inline-block;
+      margin-top: 25px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .volver:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Acordeón dinámico con JavaScript</h1>
+
+  <button class="boton">Mostrar sección 1</button>
+  <div class="contenido">
+    <p>Contenido de la sección 1.</p>
+  </div>
+
+  <button class="boton">Mostrar sección 2</button>
+  <div class="contenido">
+    <p>Contenido de la sección 2.</p>
+  </div>
+
+  <button class="boton">Mostrar sección 3</button>
+  <div class="contenido">
+    <p>Contenido de la sección 3.</p>
+  </div>
+
+
+  <a class="volver" href="../../index.html">← Volver al portafolio</a>
+
+
+
+  <script>
+    const botones = document.querySelectorAll(".boton");
+    const contenidos = document.querySelectorAll(".contenido");
+
+    botones.forEach((boton, index) => {
+      boton.addEventListener("click", () => {
+        const estaActivo = contenidos[index].classList.contains("activo");
+
+        contenidos.forEach((contenido, i) => {
+          contenido.classList.remove("activo");
+          botones[i].textContent = "Mostrar sección " + (i + 1);
+        });
+
+        if (!estaActivo) {
+          contenidos[index].classList.add("activo");
+          boton.textContent = "Ocultar sección " + (index + 1);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

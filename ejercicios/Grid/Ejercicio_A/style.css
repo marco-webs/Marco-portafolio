@@ -1,0 +1,34 @@
+/* Reset mínimo */
+*:where(*) { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.4 system-ui, Segoe UI, Roboto, Arial, sans-serif; }
+
+/* Cabecera reutilizable */
+.topbar { margin:16px; display:flex; flex-wrap:wrap; gap:8px; }
+.btn { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .8rem; border:1px solid #bbb; border-radius:8px; background:#f8f8f8; cursor:pointer; text-decoration:none; color:#111; }
+.btn:hover { background:#eee; }
+
+#panelCodigo { margin: 0 16px; }
+#panelCodigo summary { cursor:pointer; font-weight:bold; }
+#panelCodigo pre { padding:12px; border:1px solid #ccc; overflow:auto; max-height:55vh; }
+.panel-actions { display:flex; gap:8px; margin:8px 0; }
+
+.wrap { padding: 0 16px 24px; }
+
+h1 { margin: 8px 0 16px; font-size: 22px; }
+
+/* GRID: auto-fit + minmax = responsive sin media queries */
+.grid-demo {
+  display: grid;                     /* grid container (padre) */
+  gap: 12px;                         /* separación entre celdas */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  /* auto-fit (colapsa columnas vacías), minmax(160px,1fr) (cada columna no baja de 160px y puede estirarse) */
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  background: #f8f8f8;
+  text-align: center;
+  font-weight: 700;
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Marco Jiménez — Desarrollo Web</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- CSS compartido -->
+  <link rel="stylesheet" href="CSS/style.css" />
+  <div id="vw-indicator" aria-live="polite" title="Ancho de la ventana"></div>
+<script>
+  (function () {
+    const el = document.getElementById('vw-indicator');
+
+    // Estilos inline para no depender de tu CSS
+    Object.assign(el.style, {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      right: '0',
+      padding: '6px 10px',
+      fontFamily: 'ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto',
+      fontSize: '12px',
+      lineHeight: '1',
+      textAlign: 'center',
+      color: '#0b1324',
+      background: '#e6f0ff',
+      borderBottom: '1px solid #c7dbff',
+      zIndex: '99999',
+      pointerEvents: 'none' // no molesta al clicar
+    });
+
+    function label(width) {
+      if (width >= 1200) return '≥1200px (XL)';
+      if (width >= 768)  return '≥768px (MD)';
+      return '<768px (SM)';
+    }
+
+    function colorize(width) {
+      // Cambia el color según el breakpoint para verlo de un vistazo
+      if (width >= 1200) {
+        el.style.background = '#e7ffe7'; // verde suave
+        el.style.borderBottomColor = '#b9e4b9';
+        el.style.color = '#063b06';
+      } else if (width >= 768) {
+        el.style.background = '#fff7e6'; // ámbar suave
+        el.style.borderBottomColor = '#ffe0a8';
+        el.style.color = '#5b4000';
+      } else {
+        el.style.background = '#e6f0ff'; // azul suave
+        el.style.borderBottomColor = '#c7dbff';
+        el.style.color = '#0b1324';
+      }
+    }
+
+    function update() {
+      const w = window.innerWidth;
+      el.textContent = `Viewport: ${w}px — ${label(w)}`;
+      colorize(w);
+    }
+
+    // Actualiza al cargar y al redimensionar (con rAF para fluidez)
+    let ticking = false;
+    window.addEventListener('resize', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          update();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    update();
+  })();
+</script>
+.ftr{
+  border-top: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color: #e5e7eb;
+}
+
+
+</head>
+<body>
+  <header>
+    <div class="contenedor header-wrap">
+      <div class="marca"><strong>Marco Jiménez</strong> — Desarrollo Web</div>
+
+      <!-- Botón CV -->
+      <!--<a class="cta-btn header-cta"
+         href="Portafolio/docs/Marco_Jimenez-CURRICULUM.pdf"
+         title="Pulsa aquí para ver Curriculum Vitae"
+         aria-label="Abrir Curriculum Vitae (PDF)">
+        Curriculum Vitae (PDF)
+      </a>-->
+      <a class="btn" href="Portafolio/docs/visor4curriculum.html" title="Ver Currículum Vitae">Ver CV</a>
+
+
+      <!-- Botón Inicio (regresar al índice raíz) -->
+      <!--<a class="btn btn-outline" href="index.html" title="Volver al inicio">Inicio</a> -->
+      <!-- Este boton está anulado porque apuntaria a si mismo además de que ya tiene el boton mas adelante-->
+
+      <nav class="nav">
+     
+        <a href="Portafolio/index.html">Portafolio</a>
+        <a href="#ejercicios">Ejercicios</a>
+        <a href="#proyectos">Proyectos</a>
+
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Portafolio destacado -->
+    <section class="contenedor hero" id="portafolio">
+      <h2>Portafolio</h2>
+      <p class="muted">Accede a todos los ejercicios y proyectos.</p>
+    </section>
+
+    <section class="contenedor grid">
+      <a class="tile-link" href="Portafolio/index.html" aria-label="Abrir Portafolio">
+        <article class="card">
+          <span class="pill">General</span>
+          <h3>Portafolio</h3>
+          <p class="muted">Listado central de ejercicios y mini-proyectos.</p>
+        </article>
+      </a>
+    </section>
+
+    <!-- Ejercicios -->
+    <section class="contenedor hero" id="ejercicios">
+      <h2>Ejercicios</h2>
+      <p class="muted">Prácticas del curso (HTML, CSS, Grid, Flexbox…).</p>
+    </section>
+
+    <section class="contenedor grid">
+      <a class="tile-link" href="ejercicios/Flex_Wrap/index.html" aria-label="Abrir práctica: Flexbox — Repaso">
+        <article class="card">
+          <span class="pill">CSS</span>
+          <h3>Flexbox — Repaso</h3>
+          <p class="muted">Alineación 1D, justify/align, wrap.</p>
+        </article>
+      </a>
+
+      <a class="tile-link" href="ejercicios/Grid/index.html" aria-label="Abrir práctica: Grid — Layout básico">
+        <article class="card">
+          <span class="pill">CSS</span>
+          <h3>Grid — Layout básico</h3>
+          <p class="muted">Áreas, filas/columnas, gap.</p>
+        </article>
+      </a>
+
+      <a class="tile-link" href="ejercicios/Formularios/index.html" aria-label="Abrir práctica: Formularios">
+        <article class="card">
+          <span class="pill">HTML</span>
+          <h3>Formularios</h3>
+          <p class="muted">Inputs, select y validación.</p>
+        </article>
+      </a>
+
+      <a class="tile-link" href="ejercicios/Flex_Avanzado/index.html" aria-label="Abrir práctica: Flexbox — Avanzado">
+        <article class="card">
+          <span class="pill">CSS</span>
+          <h3>Flexbox — Avanzado</h3>
+          <p class="muted">Patrones complejos, orden, gaps y trucos.</p>
+        </article>
+      </a>
+    </section>
+
+    <!-- Proyectos -->
+    <section class="contenedor hero" id="proyectos">
+      <h2>Proyectos</h2>
+      <p class="muted">Maquetas y trabajos aplicados.</p>
+    </section>
+
+    <section class="contenedor grid">
+      <a class="tile-link" href="Beauty_Venu/index.html" aria-label="Abrir proyecto: Beauty Venus — Home">
+        <article class="card">
+          <span class="pill">Maqueta</span>
+          <h3>Beauty Venus — Home</h3>
+          <p class="muted">Estructura inicial y CTAs de conversión.</p>
+        </article>
+      </a>
+    </section>
+    
+    <footer class="ftr" role="contentinfo">
+  <div class="ftr-grid">
+    <section class="ftr-col">
+      <h4>Portafolio</h4>
+      <ul>
+        <li><a href="Portafolio/index.html">Resumen</a></li>
+        <li><a href="ejercicios/Flex_Wrap/index.html">Flexbox</a></li>
+        <li><a href="ejercicios/Grid/index.html">Grid</a></li>
+        <li><a href="Beauty_Venu/index.html">Proyecto Beauty_Venu</a></li>
+      </ul>
+    </section>
+
+    <nav class="ftr-col" aria-label="Enlaces útiles">
+      <h4>Recursos</h4>
+      <ul>
+        <li><a href="https://developer.mozilla.org/">MDN Web Docs</a></li>
+        <li><a href="https://codepen.io/">CodePen</a></li>
+        <li><a href="https://css-tricks.com/">CSS-Tricks</a></li>
+        <li><a href="https://web.dev/learn/">web.dev/learn</a></li>
+      </ul>
+    </nav>
+
+    <section class="ftr-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="mailto:marco@example.com">marco@example.com</a></li>
+        <li><a href="visor4curriculum.html">Ver CV</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="ftr-copy">© 2025 Marco — Portafolio</div>
+</footer>
+
+  
+  </main>
+ 

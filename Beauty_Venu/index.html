@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beauty Venus · Maqueta e‑commerce</title>
+    <link rel="stylesheet" href="./style.css" />
+    <meta
+      name="description"
+      content="Maqueta e‑commerce de cosmética: landing + rejilla de productos."
+    />
+  </head>
+  <body>
+    <nav class="topbar">
+      <a class="btn" href="../index.html" title="Portafolio">Volver al Portafolio</a>
+
+      <button class="btn ver-codigo" data-src="index.html">Ver HTML</button>
+      <button class="btn ver-codigo" data-src="style.css">Ver CSS</button>
+      <button class="btn ver-codigo" data-src="script.js">Ver JS</button>
+    </nav>
+
+    <details id="panelCodigo" hidden>
+      <summary>Código fuente</summary>
+      <pre><code id="bloqueCodigo">Pulsa un botón de “Ver …”.</code></pre>
+      <div class="panel-actions">
+        <button class="btn" id="copiarCodigo">Copiar</button>
+        <button class="btn" id="cerrarPanel">Cerrar</button>
+      </div>
+    </details>
+
+    <script>
+      const panel = document.querySelector('#panelCodigo');
+      const codeEl = document.querySelector('#bloqueCodigo');
+
+      document.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.ver-codigo');
+        if (!btn) return;
+        const archivo = btn.dataset.src;
+        try {
+          const resp = await fetch(archivo);
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          const texto = await resp.text();
+          codeEl.textContent = texto;
+          panel.hidden = false;
+          panel.open = true;
+        } catch (err) {
+          alert('No pude cargar "' + archivo + '". Abre con Live Server.\n' + err.message);
+        }
+      });
+
+      document.querySelector('#copiarCodigo').addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(codeEl.textContent);
+          alert('Código copiado ✔');
+        } catch {
+          alert('No pude copiar. Selecciona y Ctrl+C.');
+        }
+      });
+
+      document.querySelector('#cerrarPanel').addEventListener('click', () => {
+        panel.open = false;
+      });
+    </script>
+
+    <header class="topbar" role="banner">
+      <div class="wrap">
+        <a class="logo" href="#" aria-label="Beauty Venus, inicio">Beauty<span>Venus</span></a>
+        <nav aria-label="principal" class="nav">
+          <a href="#" class="nav__link" aria-current="page">Inicio</a>
+          <a href="#productos" class="nav__link">Productos</a>
+          <a href="#contacto" class="nav__link">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="wrap hero__grid">
+          <div class="hero__copy">
+            <h1>Cuida tu piel, brilla cada día</h1>
+            <p class="muted">
+              Cosmética consciente con ingredientes naturales y envases reciclables.
+            </p>
+            <div class="cta">
+              <a class="btn btn--primary" href="#productos">Ver novedades</a>
+              <a class="btn" href="#contacto">Saber más</a>
+            </div>
+          </div>
+          <div class="hero__image" role="img" aria-label="Foto de productos de cosmética"></div>
+        </div>
+      </section>
+
+      <!-- LISTADO DE PRODUCTOS -->
+      <section id="productos" class="section">
+        <div class="wrap">
+          <h2>Top ventas</h2>
+          <div class="grid products">
+            <!-- Producto -->
+            <article class="card product">
+              <div class="product__img" role="img" aria-label="Serum vitamina C"></div>
+              <h3 class="product__title">Serum Vitamina C 10%</h3>
+              <p class="product__price">14,95 €</p>
+              <button class="btn btn--primary" aria-label="Añadir Serum Vitamina C al carrito">
+                Añadir
+              </button>
+            </article>
+
+            <article class="card product">
+              <div class="product__img" role="img" aria-label="Crema hidratante aloe vera"></div>
+              <h3 class="product__title">Crema Hidratante Aloe</h3>
+              <p class="product__price">12,50 €</p>
+              <button class="btn btn--primary" aria-label="Añadir Crema Hidratante al carrito">
+                Añadir
+              </button>
+            </article>
+
+            <article class="card product">
+              <div class="product__img" role="img" aria-label="Protector solar SPF 50"></div>
+              <h3 class="product__title">Protector Solar SPF50</h3>
+              <p class="product__price">18,90 €</p>
+              <button class="btn btn--primary" aria-label="Añadir Protector Solar al carrito">
+                Añadir
+              </button>
+            </article>
+
+            <article class="card product">
+              <div
+                class="product__img"
+                role="img"
+                aria-label="Mascarilla facial arcilla verde"
+              ></div>
+              <h3 class="product__title">Mascarilla Arcilla Verde</h3>
+              <p class="product__price">9,95 €</p>
+              <button
+                class="btn btn--primary"
+                aria-label="Añadir Mascarilla Arcilla Verde al carrito"
+              >
+                Añadir
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOQUE INFO -->
+      <section class="section section--alt" id="contacto">
+        <div class="wrap info">
+          <div class="card">
+            <h3>Envío 24/48h</h3>
+            <p class="muted">Gratis en pedidos desde 30 €</p>
+          </div>
+          <div class="card">
+            <h3>Ingredientes</h3>
+            <p class="muted">Fórmulas veganas y sin crueldad</p>
+          </div>
+          <div class="card">
+            <h3>Atención 7/7</h3>
+            <p class="muted">Soporte por chat y email</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="wrap">
+        <small>© <span id="y"></span> Beauty Venus — Maqueta de práctica (no venta real).</small>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Grid – Ejercicio A (Galería)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- CABECERA LOCAL -->
+  <nav class="topbar">
+   
+  <a class="btn" href="../../../index.html" title="Volver al inicio">Inicio</a>
+    <button class="btn ver-codigo" data-src="index.html">Ver HTML</button>
+    <button class="btn ver-codigo" data-src="style.css">Ver CSS</button>
+    <button class="btn ver-codigo" data-src="script.js">Ver JS</button>
+  </nav>
+
+  <details id="panelCodigo" hidden>
+    <summary>Código fuente</summary>
+    <pre><code id="bloqueCodigo">Pulsa un botón de “Ver …”.</code></pre>
+    <div class="panel-actions">
+      <button class="btn" id="copiarCodigo">Copiar</button>
+      <button class="btn" id="cerrarPanel">Cerrar</button>
+    </div>
+  </details>
+
+  <main class="wrap">
+    <h1>Galería responsive (sin media queries)</h1>
+
+    <section class="grid-demo">
+      <!-- 12 ítems de ejemplo -->
+      <div class="card">A</div>
+      <div class="card">B</div>
+      <div class="card">C</div>
+      <div class="card">D</div>
+      <div class="card">E</div>
+      <div class="card">F</div>
+      <div class="card">G</div>
+      <div class="card">H</div>
+      <div class="card">I</div>
+      <div class="card">J</div>
+      <div class="card">K</div>
+      <div class="card">L</div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+
+  <script>
+    // === Lógica del visor de código (fetch = traer archivos por HTTP; requiere Live Server)
+    const panel = document.querySelector('#panelCodigo');
+    const codeEl = document.querySelector('#bloqueCodigo');
+
+    document.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.ver-codigo');
+      if (!btn) return;
+      const archivo = btn.dataset.src;
+      try {
+        const resp = await fetch(archivo);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        const texto = await resp.text();
+        codeEl.textContent = texto;    // textContent = pega texto literal
+        panel.hidden = false;
+        panel.open = true;             // abre <details>
+      } catch (err) {
+        alert('No pude cargar "' + archivo + '". Abre con Live Server.\n' + err.message);
+      }
+    });
+
+    document.querySelector('#copiarCodigo').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(codeEl.textContent); alert('Código copiado ✔'); }
+      catch { alert('No pude copiar automáticamente. Selecciona y Ctrl+C.'); }
+    });
+
+    document.querySelector('#cerrarPanel').addEventListener('click', () => { panel.open = false; });
+  </script>
+</body>
+</html>

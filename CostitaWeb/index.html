@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pintura y Reformas Costita | Marchena</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="nav-volver">
+      <a href="../index.html">← Volver al portafolio</a>
+    </nav>
+
+    <header class="header">
+      <div class="container header__inner">
+        <div class="brand">
+          <div class="brand__logo">KF</div>
+          <div class="brand__text">
+            <strong>Costita</strong>
+            <span>Pintura y Reformas</span>
+          </div>
+        </div>
+        <div class="header__contact">
+          📞
+          <a href="tel:+34600000000">600 000 000</a>
+        </div>
+
+        <nav class="nav">
+          <a href="#servicios">Servicios</a>
+          <a href="#trabajos">Trabajos</a>
+          <a href="#sobre-mi">Sobre mí</a>
+          <!-- <a class="btn btn--small" href="#contacto">Contacto</a> -->
+          <a class="btn btn--accent btn--small" href="#contacto">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__inner">
+          <div class="hero__text">
+            <h1>Pintura profesional en Marchena y alrededores</h1>
+            <p>
+              Acabados limpios, seriedad y presupuesto sin compromiso. Interior, exterior y
+              decoración.
+            </p>
+
+            <!-- 
+          <div class="hero__actions">
+            <a class="btn" href="#contacto">Pedir presupuesto</a>
+            <a class="btn btn--ghost" href="tel:+34600000000">Llamar</a>
+          </div> -->
+            <div class="hero__actions">
+              <a class="btn btn--accent" href="#" id="waHero"> Pedir presupuesto por WhatsApp </a>
+
+              <p class="phone">📞 <a href="tel:+34600000000">600 000 000</a></p>
+
+              <a class="btn btn--ghost" href="tel:+34600000000"> Llamar </a>
+            </div>
+
+            <ul class="badges">
+              <li>Presupuesto rápido</li>
+              <li>Trabajo fino</li>
+              <li>Seriedad</li>
+            </ul>
+          </div>
+
+          <div class="hero__card">
+            <h2>¿Qué necesitas pintar?</h2>
+            <p>Cuéntame el tipo de trabajo y te respondo en el día.</p>
+            <a class="btn btn--full" href="#contacto">Escribir ahora</a>
+            <p class="muted">Respuesta rápida por WhatsApp</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="servicios" class="section">
+        <div class="container">
+          <h2>Servicios</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>Interiores</h3>
+              <p>Pisos, casas, techos y paredes con acabados limpios.</p>
+            </article>
+            <article class="card">
+              <h3>Exteriores</h3>
+              <p>Fachadas, patios y zonas comunes. Preparación y protección.</p>
+            </article>
+            <article class="card">
+              <h3>Decoración</h3>
+              <p>Estucos, efectos, alisados y detalles decorativos.</p>
+            </article>
+            <article class="card">
+              <h3>Reformas</h3>
+              <p>Pequeñas reformas, arreglos y remates.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="trabajos" class="section section--alt">
+        <div class="container">
+          <h2>Antes y después</h2>
+          <p class="lead">
+            Nada convence más que ver el cambio. (Aquí pondremos fotos reales de Costita).
+          </p>
+
+          <div class="beforeafter">
+            <figure class="ba">
+              <img src="img/antes1.jpg" alt="Antes (ejemplo)" />
+              <figcaption>Antes</figcaption>
+            </figure>
+            <figure class="ba">
+              <img src="img/despues1.jpg" alt="Después (ejemplo)" />
+              <figcaption>Después</figcaption>
+            </figure>
+          </div>
+
+          <div class="beforeafter">
+            <figure class="ba">
+              <img src="img/antes2.jpg" alt="Antes (ejemplo)" />
+              <figcaption>Antes</figcaption>
+            </figure>
+            <figure class="ba">
+              <img src="img/despues2.jpg" alt="Después (ejemplo)" />
+              <figcaption>Después</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="sobre-mi" class="section">
+        <div class="container">
+          <h2>Sobre mí</h2>
+          <p class="lead">
+            Soy Costita. Trabajo con seriedad, limpieza y buenos acabados. Mi objetivo: que te
+            quedes tranquilo con el resultado.
+          </p>
+        </div>
+      </section>
+
+      <section id="contacto" class="section section--alt">
+        <div class="container">
+          <h2>Contacto</h2>
+
+          <div class="contact">
+            <form class="form" action="#" method="post">
+              <label>
+                Nombre
+                <input type="text" name="name" placeholder="Tu nombre" required />
+              </label>
+
+              <label>
+                Teléfono
+                <input type="tel" name="phone" placeholder="Tu teléfono" required />
+              </label>
+
+              <label>
+                Mensaje
+                <textarea
+                  name="msg"
+                  rows="5"
+                  placeholder="¿Qué necesitas pintar? Zona, metros aproximados, fecha..."
+                  required
+                ></textarea>
+              </label>
+
+              <button class="btn btn--full" type="submit">Enviar</button>
+              <p class="muted">
+                * Este formulario es de ejemplo. Podemos enviarlo por email o WhatsApp.
+              </p>
+            </form>
+
+            <aside class="contact__info">
+              <div class="infoBox">
+                <h3>También por WhatsApp</h3>
+                <p>Más rápido para presupuestos.</p>
+                <a class="btn btn--ghost btn--full" href="#" id="waLink">Abrir WhatsApp</a>
+              </div>
+
+              <div class="infoBox">
+                <h3>Zona</h3>
+                <p>Marchena y alrededores</p>
+                <h3>Horario</h3>
+                <p>L–V 9:00–19:00</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <a class="wa-float" href="#" id="waFloat" aria-label="Contactar por WhatsApp">WhatsApp</a>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© <span id="year"></span> Costita · Pintura y Reformas</p>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

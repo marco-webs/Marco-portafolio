@@ -1,0 +1,22 @@
+// 1. Datos básicos
+const mi_nombre = "Marco";
+const fecha_de_mi_nacimiento = new Date(1971, 8, 1); // Ojo: 8 = septiembre (los meses empiezan en 0)
+const hoy = new Date();
+
+// 2. Partes de la fecha de nacimiento
+const dia_nac = fecha_de_mi_nacimiento.getDate();
+const mes_nac = fecha_de_mi_nacimiento.getMonth() + 1; // +1 porque getMonth() va de 0 a 11
+const año_nac = fecha_de_mi_nacimiento.getFullYear();
+
+// 3. Partes de la fecha actual
+const dia_hoy = hoy.getDate();
+const mes_hoy = hoy.getMonth() + 1;
+const año_hoy = hoy.getFullYear();
+
+// 4. Mensaje completo (usando plantilla con ` y ${})
+const mensaje = `Mi nombre es ${mi_nombre}. Nací el día ${dia_nac} del mes ${mes_nac} del año ${año_nac}. 
+Hoy es ${dia_hoy}/${mes_hoy}/${año_hoy} y estoy dando mis primeros pasos en JavaScript, 
+practicando con variables de texto, números y fechas.`;
+
+// 5. Mostrar el resultado
+console.log(mensaje);

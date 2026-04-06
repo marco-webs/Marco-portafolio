@@ -1,0 +1,47 @@
+===============================
+  Chuleta rápida HTML + CSS
+===============================
+
+HTML - Etiquetas básicas
+------------------------
+<!DOCTYPE html>     - Define el tipo de documento
+<html>...</html>    - Raíz del documento
+<head>...</head>    - Metadatos, enlaces a CSS/JS
+<body>...</body>    - Contenido visible
+<h1>...<h6>        - Encabezados
+<p>                - Párrafo
+<a href="">        - Enlace
+<img src="" alt="">- Imagen
+<ul>, <ol>, <li>   - Listas
+<table>, <tr>, <td>, <th> - Tablas
+<form>, <input>, <textarea>, <button> - Formularios
+
+CSS - Propiedades básicas
+-------------------------
+color: red;                 - Color del texto
+background-color: blue;     - Fondo
+font-family: Arial;         - Tipografía
+font-size: 16px;            - Tamaño de fuente
+margin: 10px;               - Margen exterior
+padding: 10px;              - Relleno interior
+border: 1px solid black;    - Borde
+width / height              - Ancho y alto
+text-align: center;         - Alineación de texto
+
+CSS - Flexbox
+-------------
+display: flex;                        - Activa Flexbox
+flex-direction: row | column
+justify-content: flex-start | center | space-between
+align-items: flex-start | center | stretch
+flex-wrap: nowrap | wrap
+
+CSS - Grid
+----------
+display: grid;                        - Activa Grid
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: auto 100px auto;
+gap: 10px;                            - Espacio entre filas/columnas
+grid-column: 1 / 3;                    - Ocupa varias columnas
+grid-row: 1 / 2;                       - Ocupa varias filas
+grid-template-areas:                   - Define layout por nombres

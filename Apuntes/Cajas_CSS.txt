@@ -1,0 +1,11 @@
+Conceptos básicos
+
+Cada caja tiene:
+
+content → el contenido (texto, imagen, etc.).
+
+padding → espacio entre el contenido y el borde.
+
+border → el borde que rodea la caja.
+
+margin → espacio entre una caja y las demás.

@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 2px solid black;
+  padding: 10px;
+  max-width: 600px;
+  justify-content: start; /* 👈 prueba también space-between, space-around, space-evenly */
+}
+<style>
+  .btn{display:inline-block;padding:.55rem 1rem;border:1px solid #222;border-radius:.5rem;
+       text-decoration:none;font-weight:600;line-height:1;transition:.15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-outline{background:#fff;color:#222}
+</style>
+.topbar { margin:16px 0; display:flex; flex-wrap:wrap; gap:8px; font-family:system-ui, Segoe UI, Roboto, Arial, sans-serif; }
+.btn { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .8rem; border:1px solid #bbb; border-radius:8px; background:#f8f8f8; cursor:pointer; text-decoration:none; color:#111; }
+.btn:hover { background:#eee; }
+#panelCodigo summary { cursor:pointer; font-weight:bold; }
+#panelCodigo pre { padding:12px; border:1px solid #ccc; overflow:auto; max-height:55vh; }
+.panel-actions { display:flex; gap:8px; margin:8px 0; }
+
+

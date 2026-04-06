@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pestañas profesionales con memoria</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border: none;
+      background-color: #ddd;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .tab-btn.activo {
+      background-color: #333;
+      color: white;
+    }
+
+    .tab-contenido {
+      display: none;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f5f5f5;
+    }
+
+    .tab-contenido.activo {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Pestañas con data-attributes y memoria</h2>
+
+  <div class="tabs">
+    <button class="tab-btn activo" data-tab="descripcion">Descripción</button>
+    <button class="tab-btn" data-tab="opiniones">Opiniones</button>
+    <button class="tab-btn" data-tab="contacto">Contacto</button>
+  </div>
+
+  <div class="tab-contenido activo" data-contenido="descripcion">
+    Aquí va la descripción del servicio o producto.
+  </div>
+
+  <div class="tab-contenido" data-contenido="opiniones">
+    Aquí irían las opiniones de clientes.
+  </div>
+
+  <div class="tab-contenido" data-contenido="contacto">
+    Aquí irían los datos de contacto.
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll(".tab-btn");
+    const contenidos = document.querySelectorAll(".tab-contenido");
+
+    function quitarActivos() {
+      botones.forEach((boton) => {
+        boton.classList.remove("activo");
+      });
+
+      contenidos.forEach((contenido) => {
+        contenido.classList.remove("activo");
+      });
+    }
+
+    function activarTab(nombreTab) {
+      const botonActivo = document.querySelector(`[data-tab="${nombreTab}"]`);
+      const contenidoActivo = document.querySelector(`[data-contenido="${nombreTab}"]`);
+
+      if (!botonActivo || !contenidoActivo) {
+        return;
+      }
+
+      quitarActivos();
+      botonActivo.classList.add("activo");
+      contenidoActivo.classList.add("activo");
+    }
+
+    const tabGuardada = localStorage.getItem("tabActiva");
+
+    if (tabGuardada) {
+      activarTab(tabGuardada);
+    }
+
+    botones.forEach((boton) => {
+      boton.addEventListener("click", () => {
+        const nombreTab = boton.dataset.tab;
+
+        activarTab(nombreTab);
+        localStorage.setItem("tabActiva", nombreTab);
+      });
+    });
+  </script>
+
+</body>
+</html>

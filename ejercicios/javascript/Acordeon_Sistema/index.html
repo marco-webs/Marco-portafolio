@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Acordeón JavaScript</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #111;
+      color: white;
+    }
+
+    .boton {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .boton:hover {
+      background-color: #555;
+    }
+
+    .contenido {
+      padding: 10px;
+      background-color: #222;
+      border-left: 3px solid red;
+      margin-bottom: 10px;
+    }
+
+    .oculto {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Acordeón con JavaScript</h1>
+
+  <button class="boton">Mostrar 1</button>
+  <p class="contenido oculto">Este es el contenido 1</p>
+
+  <button class="boton">Mostrar 2</button>
+  <p class="contenido oculto">Este es el contenido 2</p>
+
+  <button class="boton">Mostrar 3</button>
+  <p class="contenido oculto">Este es el contenido 3</p>
+
+  <script>
+    const botones = document.querySelectorAll(".boton");
+    const contenidos = document.querySelectorAll(".contenido");
+
+    botones.forEach((boton, index) => {
+
+      boton.addEventListener("click", () => {
+
+        const estaOculto = contenidos[index].classList.contains("oculto");
+
+        // Cerrar todos
+        contenidos.forEach(c => c.classList.add("oculto"));
+
+        // Resetear textos
+        botones.forEach(b => b.textContent = "Mostrar");
+
+        // Si estaba cerrado → abrirlo
+        if (estaOculto) {
+          contenidos[index].classList.remove("oculto");
+          boton.textContent = "Ocultar";
+        }
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>

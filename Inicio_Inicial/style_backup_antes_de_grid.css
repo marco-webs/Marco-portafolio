@@ -1,0 +1,101 @@
+:root{
+  --bg:#0f172a;       /* fondo */
+  --card:#111827;     /* tarjetas */
+  --fg:#e2e8f0;       /* texto principal */
+  --muted:#547cb4;    /* texto secundario */
+  --accent:#2f855a;   /* verde botón */
+  --accent-hover:#276749;
+  --b:#1f2937;        /* bordes */
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui, Arial, sans-serif;
+  background:rgb(75, 153, 82);
+  color:rgb(16, 3, 29);
+  line-height:1.6;
+}
+
+.contenedor{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* Header con botón CV entre marca y navegación */
+header{border-bottom:1px solid var(--b)}
+.header-wrap{
+  display:flex; align-items:center; gap:12px;
+  padding:16px 0; flex-wrap:wrap;
+}
+.marca{white-space:nowrap}
+
+.nav{margin-left:auto; display:flex; gap:12px; flex-wrap:wrap}
+.nav a{
+  color:var(--fg); text-decoration:none; opacity:.9;
+  border:1px solid #263044; padding:6px 10px; border-radius:8px;
+}
+.nav a:hover{opacity:1; background:#111a34}
+
+/* Botón CV (estilo compacto para header) */
+.cta-btn{
+  display:inline-block;
+  padding:8px 14px;
+  background:var(--accent);
+  color:#fff; text-decoration:none; font-weight:700;
+  border-radius:10px;
+  transition:transform .08s ease, background .2s ease;
+}
+.cta-btn:hover{background:var(--accent-hover); transform:translateY(-1px)}
+
+/* En pantallas estrechas, que el botón ocupe fila completa antes del menú */
+@media (max-width:720px){
+  .header-cta{width:100%; text-align:center; order:2}
+  .nav{order:3; margin-left:0}
+}
+
+/* Secciones y tipografía auxiliar */
+.hero{margin:24px 0}
+.muted{color:var(--muted)}
+
+/* Grid de tarjetas */
+.grid{
+  display:grid; gap:16px; margin:8px 0 40px;
+  grid-template-columns:repeat(3,1fr);
+}
+@media (max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--b);
+  border-radius:12px;
+  padding:16px;
+}
+.pill{
+  display:inline-block; font-size:12px; padding:4px 8px;
+  border:1px solid #334155; border-radius:999px;
+  color:var(--muted); margin-bottom:6px;
+}
+.link{color:#330205}
+
+/* Tarjeta clicable completa para Proyectos */
+.card.card-link a{
+  display:block;
+  color:inherit;
+  text-decoration:none;
+  height:100%;
+}
+.card.card-link a:hover h3{
+  text-decoration:underline;
+}
+ 
+
+
+
+/* Footer */
+footer{border-top:1px solid var(--b); margin-top:24px}
+.footer-wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 0}
+.topbar { margin:16px 0; display:flex; flex-wrap:wrap; gap:8px; font-family:system-ui, Segoe UI, Roboto, Arial, sans-serif; }
+.btn { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .8rem; border:1px solid #bbb; border-radius:8px; background:#f8f8f8; cursor:pointer; text-decoration:none; color:#111; }
+.btn:hover { background:#eee; }
+#panelCodigo summary { cursor:pointer; font-weight:bold; }
+#panelCodigo pre { padding:12px; border:1px solid #ccc; overflow:auto; max-height:55vh; }
+.panel-actions { display:flex; gap:8px; margin:8px 0; }

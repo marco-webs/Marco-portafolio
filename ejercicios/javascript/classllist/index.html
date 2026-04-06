@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mostrar contenido</title>
+
+<style>
+
+.oculto{
+display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<button id="boton">Mostrar texto</button>
+
+<p id="texto" class="oculto">
+Este texto aparece y desaparece
+</p>
+
+<script>
+
+const boton = document.querySelector("#boton");
+const texto = document.querySelector("#texto");
+
+boton.addEventListener("click", () => {
+
+texto.classList.toggle("oculto");
+
+if(texto.classList.contains("oculto")){
+boton.textContent="Ver contenido";
+}else{
+boton.textContent="Cerrar contenido";
+}
+
+});
+
+</script>
+
+</body>
+</html>

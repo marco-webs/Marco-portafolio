@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pestañas reutilizables accesibles</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .tabs-component {
+      margin-bottom: 40px;
+    }
+
+    .tabs-list {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border: 1px solid #999;
+      background-color: #ddd;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .tab-btn.activo {
+      background-color: #222;
+      color: white;
+      border-color: #222;
+    }
+
+    .tab-btn:focus {
+      outline: 3px solid #999;
+      outline-offset: 2px;
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f5f5f5;
+    }
+
+    .tab-panel.activo {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pestañas reutilizables accesibles</h1>
+
+  <!-- COMPONENTE 1 -->
+  <section class="tabs-component">
+    <h2>Servicios</h2>
+
+    <div class="tabs-list" role="tablist" aria-label="Servicios">
+      <button
+        class="tab-btn activo"
+        id="servicios-tab-diseno"
+        role="tab"
+        aria-selected="true"
+        aria-controls="servicios-panel-diseno"
+        data-tab="diseno"
+        tabindex="0"
+      >
+        Diseño
+      </button>
+
+      <button
+        class="tab-btn"
+        id="servicios-tab-desarrollo"
+        role="tab"
+        aria-selected="false"
+        aria-controls="servicios-panel-desarrollo"
+        data-tab="desarrollo"
+        tabindex="-1"
+      >
+        Desarrollo
+      </button>
+
+      <button
+        class="tab-btn"
+        id="servicios-tab-soporte"
+        role="tab"
+        aria-selected="false"
+        aria-controls="servicios-panel-soporte"
+        data-tab="soporte"
+        tabindex="-1"
+      >
+        Soporte
+      </button>
+    </div>
+
+    <div
+      class="tab-panel activo"
+      id="servicios-panel-diseno"
+      role="tabpanel"
+      aria-labelledby="servicios-tab-diseno"
+    >
+      Creamos diseños claros, limpios y adaptados a móvil.
+    </div>
+
+    <div
+      class="tab-panel"
+      id="servicios-panel-desarrollo"
+      role="tabpanel"
+      aria-labelledby="servicios-tab-desarrollo"
+      hidden
+    >
+      Desarrollamos webs funcionales con HTML, CSS y JavaScript.
+    </div>
+
+    <div
+      class="tab-panel"
+      id="servicios-panel-soporte"
+      role="tabpanel"
+      aria-labelledby="servicios-tab-soporte"
+      hidden
+    >
+      Ofrecemos mantenimiento y cambios básicos tras la entrega.
+    </div>
+  </section>
+
+  <!-- COMPONENTE 2 -->
+  <section class="tabs-component">
+    <h2>Opiniones</h2>
+
+    <div class="tabs-list" role="tablist" aria-label="Opiniones">
+      <button
+        class="tab-btn activo"
+        id="opiniones-tab-clientes"
+        role="tab"
+        aria-selected="true"
+        aria-controls="opiniones-panel-clientes"
+        data-tab="clientes"
+        tabindex="0"
+      >
+        Clientes
+      </button>
+
+      <button
+        class="tab-btn"
+        id="opiniones-tab-resultados"
+        role="tab"
+        aria-selected="false"
+        aria-controls="opiniones-panel-resultados"
+        data-tab="resultados"
+        tabindex="-1"
+      >
+        Resultados
+      </button>
+
+      <button
+        class="tab-btn"
+        id="opiniones-tab-contacto"
+        role="tab"
+        aria-selected="false"
+        aria-controls="opiniones-panel-contacto"
+        data-tab="contacto"
+        tabindex="-1"
+      >
+        Contacto
+      </button>
+    </div>
+
+    <div
+      class="tab-panel activo"
+      id="opiniones-panel-clientes"
+      role="tabpanel"
+      aria-labelledby="opiniones-tab-clientes"
+    >
+      Los clientes destacan la claridad y rapidez del servicio.
+    </div>
+
+    <div
+      class="tab-panel"
+      id="opiniones-panel-resultados"
+      role="tabpanel"
+      aria-labelledby="opiniones-tab-resultados"
+      hidden
+    >
+      Las webs cargan mejor, se ven bien en móvil y transmiten más confianza.
+    </div>
+
+    <div
+      class="tab-panel"
+      id="opiniones-panel-contacto"
+      role="tabpanel"
+      aria-labelledby="opiniones-tab-contacto"
+      hidden
+    >
+      Puedes pedir información o presupuesto sin compromiso.
+    </div>
+  </section>
+
+  <script>
+    const componentes = document.querySelectorAll(".tabs-component");
+
+    componentes.forEach((componente) => {
+      const botones = componente.querySelectorAll(".tab-btn");
+      const paneles = componente.querySelectorAll(".tab-panel");
+
+      function desactivarTodo() {
+        botones.forEach((boton) => {
+          boton.classList.remove("activo");
+          boton.setAttribute("aria-selected", "false");
+          boton.setAttribute("tabindex", "-1");
+        });
+
+        paneles.forEach((panel) => {
+          panel.classList.remove("activo");
+          panel.hidden = true;
+        });
+      }
+
+      function activarTab(botonActual) {
+        const idPanel = botonActual.getAttribute("aria-controls");
+        const panelActivo = componente.querySelector(`#${idPanel}`);
+
+        desactivarTodo();
+
+        botonActual.classList.add("activo");
+        botonActual.setAttribute("aria-selected", "true");
+        botonActual.setAttribute("tabindex", "0");
+        botonActual.focus();
+
+        panelActivo.classList.add("activo");
+        panelActivo.hidden = false;
+      }
+
+      botones.forEach((boton) => {
+        boton.addEventListener("click", () => {
+          activarTab(boton);
+        });
+
+        boton.addEventListener("keydown", (e) => {
+          const arrayBotones = Array.from(botones);
+          const indiceActual = arrayBotones.indexOf(boton);
+          let nuevoIndice;
+
+          if (e.key === "ArrowRight") {
+            nuevoIndice = (indiceActual + 1) % arrayBotones.length;
+            activarTab(arrayBotones[nuevoIndice]);
+          }
+
+          if (e.key === "ArrowLeft") {
+            nuevoIndice = (indiceActual - 1 + arrayBotones.length) % arrayBotones.length;
+            activarTab(arrayBotones[nuevoIndice]);
+          }
+
+          if (e.key === "Home") {
+            activarTab(arrayBotones[0]);
+          }
+
+          if (e.key === "End") {
+            activarTab(arrayBotones[arrayBotones.length - 1]);
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

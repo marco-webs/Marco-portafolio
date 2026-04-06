@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Currículum Vitae</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Estilos mínimos, misma línea que usamos en el curso */
+    body { margin:0; font:16px/1.4 system-ui, Segoe UI, Roboto, Arial, sans-serif; }
+    .topbar { padding:12px; display:flex; flex-wrap:wrap; gap:8px; border-bottom:1px solid #ddd; }
+    .btn { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .8rem; border:1px solid #bbb; border-radius:8px; background:#f8f8f8; color:#111; text-decoration:none; cursor:pointer; }
+    .btn:hover { background:#eee; }
+    .pdf {
+      width: 100%;
+      height: calc(100vh - 58px); /* ocupa toda la pantalla menos la barra */
+      border: 0;
+    }
+    .fallback { padding:16px; }
+  </style>
+</head>
+<body>
+
+  <nav class="topbar">
+    <!-- Ruta relativa: Portafolio → subir 1 nivel a Desarrollo_Web -->
+     <a class="btn" href="../../index.html" title="Ir al inicio">Inicio</a>
+     <a class="btn" href="../index.html"  title="Volver al Portafolio">Portafolio</a>
+
+
+
+    <a class="btn" href="Marco_Jimenez-CURRICULUM.pdf" download>Descargar PDF</a>
+    <a class="btn" href="Marco_Jimenez-CURRICULUM.pdf" target="_blank" rel="noopener">Abrir en pestaña nueva</a>
+  </nav>
+
+  <!-- iframe (marco) = muestra el PDF dentro de la página -->
+  <iframe class="pdf" src="Marco_Jimenez-CURRICULUM.pdf"></iframe>
+
+  <!-- Fallback (alternativa) si el navegador no soporta PDF embebido -->
+  <div class="fallback">
+    Si no ves el PDF embebido, <a href="Marco_Jimenez-CURRICULUM.pdf" target="_blank" rel="noopener">ábrelo aquí</a> o descárgalo.
+  </div>
+
+</body>
+</html>

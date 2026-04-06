@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contador — JS</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<nav class="mini-nav">
+  <a href="./index.html">Demo</a>
+  <a href="./html.html">Ver HTML</a>
+  <a href="./css.html">Ver CSS</a>
+</nav>
+
+<main class="code-page">
+  <h1>JavaScript</h1>
+  <pre><code id="code"></code></pre>
+</main>
+
+<script>
+  fetch("./app.js")
+    .then(r => r.text())
+    .then(t => document.getElementById("code").textContent = t)
+    .catch(() => document.getElementById("code").textContent = "No se pudo cargar app.js");
+</script>
+
+</body>
+</html>

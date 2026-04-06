@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda de Ropa – Versión 1</title>
+  <style>
+    :root{
+      --bg:#0f172a;          /* fondo oscuro elegante */
+      --card:#111827;        /* tarjetas */
+      --muted:#94a3b8;       /* texto secundario */
+      --text:#e5e7eb;        /* texto principal */
+      --brand:#22d3ee;       /* acento */
+      --brand-2:#a78bfa;     /* acento secundario */
+      --ok:#34d399;          /* verde */
+      --danger:#f87171;      /* rojo */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      background:linear-gradient(180deg,#0b1220 0%, var(--bg) 60%);
+      color:var(--text);
+    }
+
+    /* Layout principal: header + grid (productos | carrito | formulario) */
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:saturate(140%) blur(6px);
+      background:rgba(17,24,39,.6); /* card con transparencia */
+      border-bottom:1px solid #1f2937;
+    }
+    .container{max-width:1200px; margin:0 auto; padding:16px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.4px}
+    .logo{width:12px; height:12px; background:conic-gradient(from 90deg,var(--brand),var(--brand-2)); border-radius:3px; box-shadow:0 0 18px rgba(34,211,238,.45)}
+    nav a{color:var(--muted); text-decoration:none; margin:0 10px; font-size:14px}
+    nav a:hover{color:var(--text)}
+
+    .grid{
+      display:grid; gap:18px; padding:20px 16px; max-width:1200px; margin:0 auto;
+      grid-template-columns: 1fr 320px; /* contenido | lateral derecho */
+    }
+
+    @media (max-width: 960px){
+      .grid{grid-template-columns: 1fr}
+      .side{order:3}
+      .cart{order:2}
+    }
+
+    /* Productos */
+    .products{
+      display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr));
+    }
+    @media (max-width: 960px){ .products{grid-template-columns: repeat(2, minmax(0,1fr));} }
+    @media (max-width: 600px){ .products{grid-template-columns: 1fr;} }
+
+    .card{
+      background:var(--card); border:1px solid #1f2937; border-radius:14px; overflow:hidden;
+      box-shadow:0 6px 24px rgba(0,0,0,.22);
+      display:flex; flex-direction:column;
+    }
+    .card .thumb{aspect-ratio: 4/3; background:#0b1220; display:grid; place-items:center; font-size:12px; color:var(--muted);}
+    .badge{position:absolute; transform:translate(10px,10px); background:rgba(34,211,238,.1); border:1px solid var(--brand); color:var(--brand); padding:4px 8px; border-radius:999px; font-size:11px}
+    .card-body{padding:14px}
+    .title{font-weight:700; margin:2px 0 6px}
+    .price{font-weight:700}
+    .muted{color:var(--muted); font-size:13px}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:12px}
+    .btn{appearance:none; cursor:pointer; border:none; border-radius:10px; padding:10px 12px; font-weight:600}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#0b1220}
+    .btn.ghost{background:transparent; color:var(--text); border:1px solid #334155}
+    .btn:active{transform:translateY(1px)}
+
+    /* Carrito (UI solo) */
+    .panel{background:var(--card); border:1px solid #1f2937; border-radius:14px; padding:14px}
+    .panel h3{margin:0 0 10px}
+    .cart-list{display:flex; flex-direction:column; gap:10px}
+    .cart-item{display:flex; align-items:center; justify-content:space-between; background:#0b1220; border:1px solid #1f2937; border-radius:10px; padding:8px 10px}
+    .cart-item .name{font-size:14px}
+    .cart-item .qty{font-size:12px; color:var(--muted)}
+    .cart-total{display:flex; align-items:center; justify-content:space-between; margin-top:12px; padding-top:10px; border-top:1px dashed #334155}
+
+    /* Formulario cliente (UI solo) */
+    form{display:grid; gap:10px}
+    label{font-size:12px; color:var(--muted)}
+    input, select, textarea{
+      width:100%; background:#0b1220; color:var(--text); border:1px solid #334155; border-radius:10px; padding:10px 12px;
+    }
+    input:focus, select:focus, textarea:focus{outline:2px solid var(--brand); border-color:transparent}
+
+    .help{font-size:12px; color:var(--muted)}
+    .footer{color:var(--muted); font-size:12px; text-align:center; padding:30px 12px}
+
+    /* Utilidades */
+    .sp-8{height:8px}
+    .sp-16{height:16px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
+      <div class="brand"><span class="logo"></span> <span>Tienda de Ropa</span></div>
+      <nav>
+        <a href="#productos">Productos</a>
+        <a href="#carrito">Carrito</a>
+        <a href="#cliente">Cliente</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="grid">
+    <!-- Columna principal: listado de productos -->
+    <section id="productos" aria-label="Listado de productos">
+      <div class="container" style="padding:0">
+        <h2 style="margin:6px 0 12px">Productos</h2>
+        <div class="products">
+          <!-- Tarjeta de producto 1 -->
+          <article class="card">
+            <div class="thumb">
+              <span class="badge">NOVEDAD</span>
+              Foto producto
+            </div>
+            <div class="card-body">
+              <div class="title">Camiseta básica</div>
+              <div class="muted">100% algodón, varias tallas</div>
+              <div class="row">
+                <span class="price">14,99 €</span>
+                <button class="btn primary" aria-label="Añadir Camiseta básica al carrito">Añadir</button>
+              </div>
+            </div>
+          </article>
+          <!-- Tarjeta 2 -->
+          <article class="card">
+            <div class="thumb">Foto producto</div>
+            <div class="card-body">
+              <div class="title">Pantalón chino</div>
+              <div class="muted">Corte recto, beige/azul</div>
+              <div class="row">
+                <span class="price">29,90 €</span>
+                <button class="btn primary">Añadir</button>
+              </div>
+            </div>
+          </article>
+          <!-- Tarjeta 3 -->
+          <article class="card">
+            <div class="thumb">Foto producto</div>
+            <div class="card-body">
+              <div class="title">Sudadera con capucha</div>
+              <div class="muted">Unisex, forro suave</div>
+              <div class="row">
+                <span class="price">34,90 €</span>
+                <button class="btn primary">Añadir</button>
+              </div>
+            </div>
+          </article>
+          <!-- Tarjeta 4 -->
+          <article class="card">
+            <div class="thumb">Foto producto</div>
+            <div class="card-body">
+              <div class="title">Chaqueta ligera</div>
+              <div class="muted">Resistente al viento</div>
+              <div class="row">
+                <span class="price">49,90 €</span>
+                <button class="btn primary">Añadir</button>
+              </div>
+            </div>
+          </article>
+          <!-- Tarjeta 5 -->
+          <article class="card">
+            <div class="thumb">Foto producto</div>
+            <div class="card-body">
+              <div class="title">Vestido midi</div>
+              <div class="muted">Corte A, varios colores</div>
+              <div class="row">
+                <span class="price">39,90 €</span>
+                <button class="btn primary">Añadir</button>
+              </div>
+            </div>
+          </article>
+          <!-- Tarjeta 6 -->
+          <article class="card">
+            <div class="thumb">Foto producto</div>
+            <div class="card-body">
+              <div class="title">Zapatillas urbanas</div>
+              <div class="muted">Suela EVA, cómodas</div>
+              <div class="row">
+                <span class="price">59,90 €</span>
+                <button class="btn primary">Añadir</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Columna lateral derecha: carrito + formulario -->
+    <aside class="cart" id="carrito" aria-label="Carrito de compra">
+      <div class="panel">
+        <h3>Carrito</h3>
+        <div class="cart-list" aria-live="polite">
+          <!-- Placeholder de items -->
+          <div class="cart-item">
+            <div>
+              <div class="name">Camiseta básica</div>
+              <div class="qty">x1</div>
+            </div>
+            <div class="price">14,99 €</div>
+          </div>
+        </div>
+        <div class="cart-total">
+          <strong>Total</strong>
+          <strong>14,99 €</strong>
+        </div>
+        <div class="sp-8"></div>
+        <button class="btn ghost" style="width:100%">Vaciar</button>
+      </div>
+
+      <div class="sp-16"></div>
+
+      <section class="panel side" id="cliente" aria-label="Datos de cliente">
+        <h3>Datos del cliente</h3>
+        <form>
+          <div>
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Ej. María Gómez" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="nombre@correo.com" required />
+          </div>
+          <div>
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" type="tel" placeholder="600 000 000" />
+          </div>
+          <div>
+            <label for="direccion">Dirección</label>
+            <input id="direccion" name="direccion" type="text" placeholder="Calle, número, ciudad" />
+          </div>
+          <div>
+            <label for="nota">Notas del pedido</label>
+            <textarea id="nota" name="nota" rows="3" placeholder="Preferencias, horario de entrega..."></textarea>
+          </div>
+          <button class="btn primary" type="button" title="(UI) Confirmar pedido">Confirmar pedido</button>
+          <p class="help">Esta es la versión <strong>UI</strong> (sin JavaScript). En la siguiente etapa guardaremos los datos y el carrito con <em>localStorage</em>.</p>
+        </form>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="footer">© 2025 Tienda de Ropa • Demo educativa (HTML + CSS)
+  </footer>
+</body>
+</html>

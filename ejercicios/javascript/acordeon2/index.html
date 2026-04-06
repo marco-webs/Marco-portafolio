@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Acordeón dinámico</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .boton {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .boton:hover {
+      background-color: #555;
+    }
+
+    .contenido {
+      max-height: 0;
+      overflow: hidden;
+      background-color: #f0f0f0;
+      padding: 0 10px;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .contenido.activo {
+      max-height: 200px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Acordeón dinámico</h2>
+
+  <button class="boton">Mostrar sección 1</button>
+  <div class="contenido">
+    <p>Contenido de la sección 1</p>
+  </div>
+
+  <button class="boton">Mostrar sección 2</button>
+  <div class="contenido">
+    <p>Contenido de la sección 2</p>
+  </div>
+
+  <button class="boton">Mostrar sección 3</button>
+  <div class="contenido">
+    <p>Contenido de la sección 3</p>
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll(".boton");
+    const contenidos = document.querySelectorAll(".contenido");
+
+    botones.forEach((boton, index) => {
+
+      boton.addEventListener("click", () => {
+
+        const estaActivo = contenidos[index].classList.contains("activo");
+
+        // cerrar todos y resetear textos
+        contenidos.forEach((contenido, i) => {
+          contenido.classList.remove("activo");
+          botones[i].textContent = "Mostrar sección " + (i + 1);
+        });
+
+        // abrir solo si estaba cerrado
+        if (!estaActivo) {
+          contenidos[index].classList.add("activo");
+          boton.textContent = "Ocultar sección " + (index + 1);
+        }
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>

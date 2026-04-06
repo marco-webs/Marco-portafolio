@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portafolio de Marco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../CSS/style.css" />
+</head>
+ 
+  <body class="page-portfolio">
+  <nav class="topbar">
+  <a class="btn" href="../index.html" title="Volver al inicio">Inicio</a>
+  <button class="btn ver-codigo" data-src="index.html">Ver HTML</button>
+  <button class="btn ver-codigo" data-src="style.css">Ver CSS</button>
+  <button class="btn ver-codigo" data-src="script.js">Ver JS</button>
+</nav>
+
+<details id="panelCodigo" hidden>
+  <summary>Código fuente</summary>
+  <pre><code id="bloqueCodigo">Pulsa un botón de “Ver …”.</code></pre>
+  <div class="panel-actions">
+    <button class="btn" id="copiarCodigo">Copiar</button>
+    <button class="btn" id="cerrarPanel">Cerrar</button>
+  </div>
+</details>
+
+<script>
+  const panel = document.querySelector('#panelCodigo');
+  const codeEl = document.querySelector('#bloqueCodigo');
+
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.ver-codigo');
+    if (!btn) return;
+    const archivo = btn.dataset.src;
+    try {
+      const resp = await fetch(archivo);
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const texto = await resp.text();
+      codeEl.textContent = texto;
+      panel.hidden = false;
+      panel.open = true;
+    } catch (err) {
+      alert('No pude cargar "' + archivo + '". Abre con Live Server.\n' + err.message);
+    }
+  });
+
+  document.querySelector('#copiarCodigo').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(codeEl.textContent); alert('Código copiado ✔'); }
+    catch { alert('No pude copiar. Selecciona y Ctrl+C.'); }
+  });
+
+  document.querySelector('#cerrarPanel').addEventListener('click', () => { panel.open = false; });
+</script>
+
+  <header>
+    
+    <div class="contenedor header-wrap">
+      <div class="marca"><strong>Marco Jiménez</strong> — Portafolio</div>
+
+      <!-- Botón CV dentro del header -->
+      <a class="cta-btn header-cta"
+         href="docs/visor4curriculum.html"
+         title="Pulsa aquí para ver Curriculum Vitae"
+         aria-label="Abrir Curriculum Vitae (PDF)">
+        Curriculum Vitae (PDF)
+      </a>
+      
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+      
+
+        <a href="#ejercicios">Ejercicios</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#ialab">IA Lab</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="contenedor hero" id="ejercicios">
+    <h2>Ejercicios</h2>
+    <p class="muted">Prácticas del curso enlazadas tal cual.</p>
+  </section>
+
+  <section class="contenedor grid">
+    <article class="card">
+      <span class="pill">CSS</span>
+      <h3>Flexbox — Repaso</h3>
+      <p class="muted">Alineación 1D, justify/align, wrap.</p>
+      <p><a class="link" href="../ejercicios/Flex_Wrap/index.html">Abrir práctica</a></p>
+    </article>
+
+    <article class="card">
+      <span class="pill">CSS</span>
+      <h3>Grid — Layout básico</h3>
+      <p class="muted">Áreas, filas/columnas, gap.</p>
+      <p><a class="link" href="../ejercicios/Grid/index.html">Abrir práctica</a></p>
+    </article>
+   
+    <article class="card">
+      <span class="pill">CSS</span>
+      <h3>Flexbox — Avanzado</h3>
+      <p class="muted">Patrones complejos, gaps, orden, trucos.</p>
+      <p><a class="link" href="../ejercicios/Flex_Avanzado/index.html">Abrir práctica</a></p>
+    </article>
+
+
+    <article class="card">
+      <span class="pill">HTML</span>
+      <h3>Formularios</h3>
+      <p class="muted">Inputs, select, validación.</p>
+      <p><a class="link" href="../ejercicios/Formularios/index.html">Abrir práctica</a></p>
+    </article>
+  </section>
+
+  <section class="contenedor hero" id="proyectos">
+    <h2>Proyectos</h2>
+    <p class="muted">Mini-proyectos y maquetas.</p>
+  </section>
+
+  <!-- Tarjeta de proyecto clicable completa -->
+  <section class="contenedor grid">
+    <article class="card card-link">
+      <a href="../Beauty_Venu/index.html" aria-label="Abrir proyecto Beauty Venus — Home">
+        <span class="pill">Maqueta</span>
+        <h3>Beauty Venus — Home</h3>
+        <p class="muted">Estructura inicial + CTAs de conversión.</p>
+      </a>
+    </article>
+  </section>
+
+  <section class="contenedor hero" id="ialab">
+    <h2>IA Lab</h2>
+    <p class="muted">Herramientas y buenas prácticas. (Próximamente.)</p>
+  </section>
+   
+  <div class=" class="page-portfolio"></div>"
+  <footer>
+    <div class="contenedor footer-wrap">
+      <small>© 2025 Marco — Portafolio</small>
+      <small class="muted">Accesible • Responsive</small>
+    </div>
+  </footer>
+   
+</body>
+</html>

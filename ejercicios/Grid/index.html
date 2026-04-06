@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <meta charset="UTF-8">
+  <title>Ejemplo CSS Grid</title>
+  <style>
+
+</style>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+  <nav class="topbar">
+  <a class="btn" href="../../index.html" title="Volver al inicio">Inicio</a>
+  <button class="btn ver-codigo" data-src="index.html">Ver HTML</button>
+  <button class="btn ver-codigo" data-src="style.css">Ver CSS</button>
+  <button class="btn ver-codigo" data-src="script.js">Ver JS</button>
+</nav>
+
+<details id="panelCodigo" hidden>
+  <summary>Código fuente</summary>
+  <pre><code id="bloqueCodigo">Pulsa un botón de “Ver …”.</code></pre>
+  <div class="panel-actions">
+    <button class="btn" id="copiarCodigo">Copiar</button>
+    <button class="btn" id="cerrarPanel">Cerrar</button>
+  </div>
+</details>
+
+<script>
+  const panel = document.querySelector('#panelCodigo');
+  const codeEl = document.querySelector('#bloqueCodigo');
+
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.ver-codigo');
+    if (!btn) return;
+    const archivo = btn.dataset.src;
+    try {
+      const resp = await fetch(archivo);
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const texto = await resp.text();
+      codeEl.textContent = texto;
+      panel.hidden = false;
+      panel.open = true;
+    } catch (err) {
+      alert('No pude cargar "' + archivo + '". Abre con Live Server.\n' + err.message);
+    }
+  });
+
+  document.querySelector('#copiarCodigo').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(codeEl.textContent); alert('Código copiado ✔'); }
+    catch { alert('No pude copiar. Selecciona y Ctrl+C.'); }
+  });
+
+  document.querySelector('#cerrarPanel').addEventListener('click', () => { panel.open = false; });
+</script>
+
+  <style>
+  .btn{display:inline-block;padding:.55rem 1rem;border:1px solid #222;border-radius:.5rem;
+       text-decoration:none;font-weight:600;line-height:1;transition:.15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-outline{background:#fff;color:#222}
+</style>
+
+  <div class="grid-container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acordeón con memoria</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .bloque {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .boton {
+      background-color: #333;
+      color: white;
+      padding: 12px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contenido {
+      max-height: 0;
+      overflow: hidden;
+      padding-left: 12px;
+      padding-right: 12px;
+      background-color: #f5f5f5;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .contenido.activo {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .icono {
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Acordeón con memoria</h2>
+
+  <div class="bloque">
+    <div class="boton">
+      <span>Sección 1</span>
+      <span class="icono">+</span>
+    </div>
+    <div class="contenido">
+      Este es el contenido de la sección 1.
+    </div>
+  </div>
+
+  <div class="bloque">
+    <div class="boton">
+      <span>Sección 2</span>
+      <span class="icono">+</span>
+    </div>
+    <div class="contenido">
+      Este es el contenido de la sección 2.
+    </div>
+  </div>
+
+  <div class="bloque">
+    <div class="boton">
+      <span>Sección 3</span>
+      <span class="icono">+</span>
+    </div>
+    <div class="contenido">
+      Este es el contenido de la sección 3.
+    </div>
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll(".boton");
+    const contenidos = document.querySelectorAll(".contenido");
+    const iconos = document.querySelectorAll(".icono");
+
+    function cerrarTodos() {
+      contenidos.forEach((contenido) => {
+        contenido.classList.remove("activo");
+        contenido.style.maxHeight = null;
+      });
+
+      iconos.forEach((icono) => {
+        icono.textContent = "+";
+      });
+    }
+
+    function abrirSeccion(indice) {
+      const contenido = contenidos[indice];
+      const icono = iconos[indice];
+
+      contenido.classList.add("activo");
+      contenido.style.maxHeight = contenido.scrollHeight + "px";
+      icono.textContent = "−";
+    }
+
+    const seccionGuardada = localStorage.getItem("seccionAbierta");
+
+    if (seccionGuardada !== null) {
+      abrirSeccion(seccionGuardada);
+    }
+
+    botones.forEach((boton, indice) => {
+      boton.addEventListener("click", () => {
+        const contenido = contenidos[indice];
+        const estaActivo = contenido.classList.contains("activo");
+
+        cerrarTodos();
+
+        if (!estaActivo) {
+          abrirSeccion(indice);
+          localStorage.setItem("seccionAbierta", indice);
+        } else {
+          localStorage.removeItem("seccionAbierta");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

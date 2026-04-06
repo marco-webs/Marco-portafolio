@@ -1,0 +1,9 @@
+static (por defecto, se colocan en orden).
+
+relative (se mueve respecto a su posición original).
+
+absolute (se coloca en relación a su contenedor más cercano con posición definida).
+
+fixed (se queda fijo en pantalla aunque hagas scroll).
+
+sticky (mezcla de relative y fixed, se queda pegado al hacer scroll hasta cierto pu

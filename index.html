@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marco Jiménez — Portafolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="contenedor header-container">
+        <div class="logo-container">
+          <h1 class="logo">Marco Jiménez</h1>
+          <p class="subtitulo">Diseño y desarrollo web orientado a resultados</p>
+        </div>
+
+        <nav class="nav">
+          <a href="#sobre-mi">Sobre mí</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="sobre-mi" class="contenedor seccion">
+        <h2>Sobre mí</h2>
+
+        <div class="acordeon">
+          <button class="pregunta" type="button">
+            ¿Quién soy?
+            <span class="icono">+</span>
+          </button>
+          <div class="respuesta">
+            <p>
+              Soy Marco Jiménez, desarrollador front-end en formación, centrado en aprender con
+              práctica real y en construir proyectos funcionales paso a paso.
+            </p>
+          </div>
+
+          <button class="pregunta" type="button">
+            ¿Qué puedo aportar?
+            <span class="icono">+</span>
+          </button>
+          <div class="respuesta">
+            <p>
+              Puedo aportar compromiso, aprendizaje constante, atención al detalle y ganas reales de
+              crear interfaces claras, útiles y bien construidas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="proyectos" class="contenedor seccion">
+        <div class="header-seccion">
+          <h2>Proyectos</h2>
+          <p class="texto-seccion">Trabajos y prácticas con enfoque real</p>
+        </div>
+        <div class="projects-grid">
+          <a href="proyectos/Web_Comercial/index.html" class="project-card">
+            <span class="tag">Nuevo</span>
+            <h3>Web Comercial</h3>
+            <p>
+              Página diseñada para ofrecer servicios de desarrollo web a negocios, enfocada en
+              conversión y captación de clientes.
+            </p>
+          </a>
+
+          <a href="./CostitaWeb/index.html" class="project-card">
+            <span class="tag">Cliente real</span>
+            <h3>Web Costita</h3>
+            <p>
+              Página web para pintor autónomo con galería de trabajos y contacto directo por
+              WhatsApp.
+            </p>
+          </a>
+
+          <a href="./Beauty_Venu/index.html" class="project-card">
+            <span class="tag">Maqueta</span>
+            <h3>Beauty Venus</h3>
+            <p>
+              Estructura inicial de una tienda online de moda femenina con enfoque en conversión.
+            </p>
+          </a>
+
+          <a href="./ejercicios/javascript/Contador_Portafolio/index.html" class="project-card">
+            <span class="tag">JavaScript</span>
+            <h3>Contador Interactivo</h3>
+            <p>
+              Contador con límites, historial de clics y almacenamiento persistente usando
+              localStorage.
+            </p>
+          </a>
+
+          <a href="./proyectos/Acordeon_JS/index.html" class="project-card">
+            <span class="tag">JavaScript</span>
+            <h3>Acordeón JS</h3>
+            <p>
+              Proyecto interactivo con secciones desplegables, animación suave y cambio dinámico de
+              texto en los botones.
+            </p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contacto" class="footer">
+      <div class="contenedor footer-contenido">
+        <div>
+          <h3>Portafolio</h3>
+          <p>Proyectos de desarrollo web y prácticas de aprendizaje.</p>
+        </div>
+
+        <div>
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contacto</h3>
+          <p>
+            Email:
+            <a href="mailto:marco.jimenez.abadia@gmail.com">marco.jimenez.abadia@gmail.com</a>
+          </p>
+          <p>
+            LinkedIn:
+            <a
+              href="https://www.linkedin.com/in/marco-antonio-jimenez-abadia/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              marco-antonio-jimenez-abadia
+            </a>
+          </p>
+          <p>Tel.: 655331410</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+.grid-container {
+  display: grid; /* Activamos Grid */
+  grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 columnas iguales */
+  gap: 10px; /* Espacio entre filas y columnas */
+  background: #eee;
+  padding: 10px;
+}
+
+.item {
+  background: lightblue;
+  border: 1px solid #333;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+}
+.topbar { margin:16px 0; display:flex; flex-wrap:wrap; gap:8px; font-family:system-ui, Segoe UI, Roboto, Arial, sans-serif; }
+.btn { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .8rem; border:1px solid #bbb; border-radius:8px; background:#f8f8f8; cursor:pointer; text-decoration:none; color:#111; }
+.btn:hover { background:#eee; }
+#panelCodigo summary { cursor:pointer; font-weight:bold; }
+#panelCodigo pre { padding:12px; border:1px solid #ccc; overflow:auto; max-height:55vh; }
+.panel-actions { display:flex; gap:8px; margin:8px 0; }
+

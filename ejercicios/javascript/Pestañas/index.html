@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pestañas con JavaScript</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border: none;
+      background-color: #ddd;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .tab-btn.activo {
+      background-color: #333;
+      color: white;
+    }
+
+    .tab-contenido {
+      display: none;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f5f5f5;
+    }
+
+    .tab-contenido.activo {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Pestañas con JavaScript</h2>
+
+  <div class="tabs">
+    <button class="tab-btn activo">Descripción</button>
+    <button class="tab-btn">Opiniones</button>
+    <button class="tab-btn">Contacto</button>
+  </div>
+
+  <div class="tab-contenido activo">
+    Aquí va la descripción del servicio o producto.
+  </div>
+
+  <div class="tab-contenido">
+    Aquí irían las opiniones de clientes.
+  </div>
+
+  <div class="tab-contenido">
+    Aquí irían los datos de contacto.
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll(".tab-btn");
+    const contenidos = document.querySelectorAll(".tab-contenido");
+
+    function quitarActivos() {
+      botones.forEach((boton) => {
+        boton.classList.remove("activo");
+      });
+
+      contenidos.forEach((contenido) => {
+        contenido.classList.remove("activo");
+      });
+    }
+
+    botones.forEach((boton, indice) => {
+      boton.addEventListener("click", () => {
+        quitarActivos();
+        boton.classList.add("activo");
+        contenidos[indice].classList.add("activo");
+      });
+    });
+  </script>
+
+</body>
+</html>
