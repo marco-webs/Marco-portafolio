@@ -1,110 +1,307 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acordeón dinámico</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acordeón dinámico</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.5;
+      }
 
-    h1 {
-      margin-bottom: 20px;
-    }
+      h1 {
+        margin-bottom: 20px;
+      }
 
-    .boton {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      background-color: #333;
-      color: white;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      font-size: 16px;
-    }
+      .boton {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        margin-top: 10px;
+        background-color: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-size: 16px;
+      }
 
-    .boton:hover {
-      background-color: #555;
-    }
+      .boton:hover {
+        background-color: #555;
+      }
 
-    .contenido {
-      max-height: 0;
-      overflow: hidden;
-      background-color: #f0f0f0;
-      padding: 0 10px;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-    }
+      .contenido {
+        max-height: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        padding: 0 10px;
+        transition:
+          max-height 0.4s ease,
+          padding 0.4s ease;
+      }
 
-    .contenido.activo {
-      max-height: 200px;
-      padding: 10px;
-    }
+      .contenido.activo {
+        max-height: 200px;
+        padding: 10px;
+      }
 
-    .volver {
-      display: inline-block;
-      margin-top: 25px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
+      .visor-codigo {
+        margin-top: 40px;
+      }
 
-    .volver:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 12px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+      }
 
-  <h1>Acordeón dinámico con JavaScript</h1>
+      .tab {
+        padding: 10px 16px;
+        border: none;
+        background-color: #d9d9d9;
+        color: #222;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 6px 6px 0 0;
+      }
 
-  <button class="boton">Mostrar sección 1</button>
-  <div class="contenido">
-    <p>Contenido de la sección 1.</p>
-  </div>
+      .tab:hover {
+        background-color: #c7c7c7;
+      }
 
-  <button class="boton">Mostrar sección 2</button>
-  <div class="contenido">
-    <p>Contenido de la sección 2.</p>
-  </div>
+      .tab.activa {
+        background-color: #333;
+        color: white;
+      }
 
-  <button class="boton">Mostrar sección 3</button>
-  <div class="contenido">
-    <p>Contenido de la sección 3.</p>
-  </div>
+      .nota-tabs {
+        margin: 0 0 20px;
+        color: #333;
+      }
 
+      .panel-codigo {
+        display: none;
+        background-color: #111;
+        color: #eaeaea;
+        padding: 18px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
 
-  <a class="volver" href="../../index.html">← Volver al portafolio</a>
+      .panel-codigo.activo {
+        display: block;
+      }
 
+      .panel-codigo pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-family: Consolas, monospace;
+        line-height: 1.5;
+      }
 
+      .panel-codigo.panel-preview {
+        background-color: #f8f8f8;
+        color: #222;
+        border: 1px solid #ddd;
+      }
 
-  <script>
-    const botones = document.querySelectorAll(".boton");
-    const contenidos = document.querySelectorAll(".contenido");
+      .volver {
+        display: inline-block;
+        margin-top: 25px;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+      }
 
-    botones.forEach((boton, index) => {
-      boton.addEventListener("click", () => {
-        const estaActivo = contenidos[index].classList.contains("activo");
+      .volver:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Acordeón dinámico con JavaScript</h1>
 
-        contenidos.forEach((contenido, i) => {
-          contenido.classList.remove("activo");
-          botones[i].textContent = "Mostrar sección " + (i + 1);
-        });
+    <button class="boton">Mostrar sección 1</button>
+    <div class="contenido">
+      <p>Contenido de la sección 1.</p>
+    </div>
 
-        if (!estaActivo) {
-          contenidos[index].classList.add("activo");
-          boton.textContent = "Ocultar sección " + (index + 1);
-        }
-      });
+    <button class="boton">Mostrar sección 2</button>
+    <div class="contenido">
+      <p>Contenido de la sección 2.</p>
+    </div>
+
+    <button class="boton">Mostrar sección 3</button>
+    <div class="contenido">
+      <p>Contenido de la sección 3.</p>
+    </div>
+
+    <section class="visor-codigo">
+      <div class="tabs">
+        <button class="tab activa" data-tab="preview">Vista</button>
+        <button class="tab" data-tab="html">HTML</button>
+        <button class="tab" data-tab="css">CSS</button>
+        <button class="tab" data-tab="js">JS</button>
+      </div>
+
+      <p class="nota-tabs">
+        <strong>Consejo:</strong> Cambia entre pestañas para ver cómo está construido el proyecto.
+      </p>
+
+      <div class="panel-codigo panel-preview activo" data-content="preview">
+        <p>Arriba tienes el acordeón funcionando. Las pestañas muestran el código del proyecto.</p>
+      </div>
+
+      <div class="panel-codigo" data-content="html">
+        <pre><code>&lt;h1&gt;Acordeón dinámico con JavaScript&lt;/h1&gt;
+
+&lt;button class="boton"&gt;Mostrar sección 1&lt;/button&gt;
+&lt;div class="contenido"&gt;
+  &lt;p&gt;Contenido de la sección 1.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;button class="boton"&gt;Mostrar sección 2&lt;/button&gt;
+&lt;div class="contenido"&gt;
+  &lt;p&gt;Contenido de la sección 2.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;button class="boton"&gt;Mostrar sección 3&lt;/button&gt;
+&lt;div class="contenido"&gt;
+  &lt;p&gt;Contenido de la sección 3.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <div class="panel-codigo" data-content="css">
+        <pre><code>body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.boton {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+}
+
+.boton:hover {
+  background-color: #555;
+}
+
+.contenido {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  padding: 0 10px;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.contenido.activo {
+  max-height: 200px;
+  padding: 10px;
+}</code></pre>
+      </div>
+
+      <div class="panel-codigo" data-content="js">
+        <pre><code>const botones = document.querySelectorAll(".boton");
+const contenidos = document.querySelectorAll(".contenido");
+
+botones.forEach((boton, index) =&gt; {
+  boton.addEventListener("click", () =&gt; {
+    const estaActivo = contenidos[index].classList.contains("activo");
+
+    contenidos.forEach((contenido, i) =&gt; {
+      contenido.classList.remove("activo");
+      botones[i].textContent = "Mostrar sección " + (i + 1);
     });
-  </script>
 
-</body>
+    if (!estaActivo) {
+      contenidos[index].classList.add("activo");
+      boton.textContent = "Ocultar sección " + (index + 1);
+    }
+  });
+});</code></pre>
+      </div>
+    </section>
+
+    <a class="volver" href="../../index.html">← Volver al portafolio</a>
+
+    <script>
+      const botones = document.querySelectorAll('.boton');
+      const contenidos = document.querySelectorAll('.contenido');
+
+      botones.forEach((boton, index) => {
+        boton.addEventListener('click', () => {
+          const estaActivo = contenidos[index].classList.contains('activo');
+
+          contenidos.forEach((contenido, i) => {
+            contenido.classList.remove('activo');
+            botones[i].textContent = 'Mostrar sección ' + (i + 1);
+          });
+
+          if (!estaActivo) {
+            contenidos[index].classList.add('activo');
+            boton.textContent = 'Ocultar sección ' + (index + 1);
+          }
+        });
+      });
+
+      const tabs = document.querySelectorAll('.tab');
+      const paneles = document.querySelectorAll('.panel-codigo');
+      const claveMemoria = 'acordeon-tab-activa';
+
+      function quitarActivosTabs() {
+        tabs.forEach((tab) => tab.classList.remove('activa'));
+        paneles.forEach((panel) => panel.classList.remove('activo'));
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const valorTab = tab.dataset.tab;
+          const panelObjetivo = document.querySelector(`[data-content="${valorTab}"]`);
+
+          quitarActivosTabs();
+          tab.classList.add('activa');
+          panelObjetivo.classList.add('activo');
+
+          localStorage.setItem(claveMemoria, valorTab);
+        });
+      });
+
+      const tabGuardada = localStorage.getItem(claveMemoria);
+
+      if (tabGuardada) {
+        const tabInicial = document.querySelector(`[data-tab="${tabGuardada}"]`);
+        const panelInicial = document.querySelector(`[data-content="${tabGuardada}"]`);
+
+        if (tabInicial && panelInicial) {
+          quitarActivosTabs();
+          tabInicial.classList.add('activa');
+          panelInicial.classList.add('activo');
+        }
+      }
+    </script>
+  </body>
 </html>
