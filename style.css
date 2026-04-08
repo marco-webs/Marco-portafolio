@@ -154,6 +154,10 @@ a {
   transform: translateY(-1px);
 }
 
+.link-codigo-top {
+  opacity: 0.85;
+}
+
 /* =========================
    ACORDEÓN
 ========================= */
@@ -319,6 +323,85 @@ a {
 }
 
 /* =========================
+   CÓDIGO DEL PORTAFOLIO
+========================= */
+
+#codigo-portafolio {
+  scroll-margin-top: 100px;
+}
+
+.visor-portafolio {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #d6e0d8;
+}
+
+.tabs-codigo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.tab-codigo {
+  padding: 8px 14px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  color: #222;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-codigo:hover {
+  background-color: #e7e7e7;
+}
+
+.tab-codigo.activa {
+  background-color: #0b1736;
+  border-color: #0b1736;
+  color: #ffffff;
+}
+
+.panel-codigo {
+  display: none;
+  overflow-x: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #0f172a;
+  color: #e5e7eb;
+}
+
+.panel-codigo.activo {
+  display: block;
+}
+
+.panel-codigo pre {
+  margin: 0;
+  font-family: Consolas, monospace;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.panel-preview {
+  border: 1px solid #dddddd;
+  background-color: #f8f8f8;
+  color: #222222;
+}
+
+.panel-preview p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* =========================
    FOOTER
 ========================= */
 
@@ -422,7 +505,16 @@ a {
   .texto-seccion {
     max-width: 100%;
   }
-}
-.header p {
-  font-size: 0.95rem;
+
+  .tabs-codigo {
+    gap: 8px;
+  }
+
+  .tab-codigo {
+    font-size: 0.82rem;
+  }
+
+  .panel-codigo {
+    padding: 16px;
+  }
 }

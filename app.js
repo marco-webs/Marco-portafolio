@@ -1,63 +1,122 @@
-function cerrarRespuesta(respuesta) {
-  respuesta.style.height = '0px';
-  respuesta.classList.remove('abierta');
+document.addEventListener('DOMContentLoaded', () => {
+  iniciarAcordeon();
+  iniciarTabsCodigo();
+  cargarCodigoReal();
+});
 
-  const pregunta = respuesta.previousElementSibling;
-  const icono = pregunta.querySelector('.icono');
+function iniciarAcordeon() {
+  const preguntas = document.querySelectorAll('.pregunta');
+  const respuestas = document.querySelectorAll('.respuesta');
 
-  pregunta.classList.remove('activa');
-  icono.textContent = '+';
-}
+  if (!preguntas.length || !respuestas.length) return;
 
-function abrirRespuesta(respuesta) {
-  respuesta.style.height = respuesta.scrollHeight + 'px';
-  respuesta.classList.add('abierta');
+  preguntas.forEach((pregunta, indice) => {
+    pregunta.addEventListener('click', () => {
+      const respuestaActual = respuestas[indice];
+      const estaAbierta = respuestaActual.classList.contains('abierta');
 
-  const pregunta = respuesta.previousElementSibling;
-  const icono = pregunta.querySelector('.icono');
+      cerrarTodasLasRespuestas(preguntas, respuestas);
 
-  pregunta.classList.add('activa');
-  icono.textContent = '−';
-}
-
-function estaAbierta(respuesta) {
-  return respuesta.style.height && respuesta.style.height !== '0px';
-}
-
-function cerrarOtrasRespuestas(acordeon, respuestaActual) {
-  const respuestas = acordeon.querySelectorAll('.respuesta');
-
-  respuestas.forEach((respuesta) => {
-    if (respuesta !== respuestaActual) {
-      cerrarRespuesta(respuesta);
-    }
-  });
-}
-
-function toggleRespuesta(acordeon, pregunta) {
-  const respuesta = pregunta.nextElementSibling;
-
-  cerrarOtrasRespuestas(acordeon, respuesta);
-
-  if (estaAbierta(respuesta)) {
-    cerrarRespuesta(respuesta);
-  } else {
-    abrirRespuesta(respuesta);
-  }
-}
-
-function inicializarAcordeon(selector) {
-  const acordeones = document.querySelectorAll(selector);
-
-  acordeones.forEach((acordeon) => {
-    const preguntas = acordeon.querySelectorAll('.pregunta');
-
-    preguntas.forEach((pregunta) => {
-      pregunta.addEventListener('click', () => {
-        toggleRespuesta(acordeon, pregunta);
-      });
+      if (!estaAbierta) {
+        abrirRespuesta(pregunta, respuestaActual);
+      }
     });
   });
 }
 
-inicializarAcordeon('.acordeon');
+function cerrarTodasLasRespuestas(preguntas, respuestas) {
+  preguntas.forEach((pregunta) => {
+    pregunta.classList.remove('activa');
+
+    const icono = pregunta.querySelector('.icono');
+    if (icono) {
+      icono.textContent = '+';
+    }
+  });
+
+  respuestas.forEach((respuesta) => {
+    respuesta.style.height = '0px';
+    respuesta.classList.remove('abierta');
+  });
+}
+
+function abrirRespuesta(pregunta, respuesta) {
+  pregunta.classList.add('activa');
+
+  const icono = pregunta.querySelector('.icono');
+  if (icono) {
+    icono.textContent = '+';
+  }
+
+  respuesta.classList.add('abierta');
+  respuesta.style.height = `${respuesta.scrollHeight}px`;
+}
+
+function iniciarTabsCodigo() {
+  const tabs = document.querySelectorAll('.tab-codigo');
+  const paneles = document.querySelectorAll('.panel-codigo');
+  const claveMemoria = 'tab-codigo-portafolio';
+
+  if (!tabs.length || !paneles.length) return;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const valorTab = tab.dataset.tab;
+      const panelObjetivo = document.querySelector(`.panel-codigo[data-content="${valorTab}"]`);
+
+      if (!panelObjetivo) return;
+
+      desactivarTabsYPaneles(tabs, paneles);
+
+      tab.classList.add('activa');
+      panelObjetivo.classList.add('activo');
+
+      localStorage.setItem(claveMemoria, valorTab);
+    });
+  });
+
+  const tabGuardada = localStorage.getItem(claveMemoria);
+
+  if (tabGuardada) {
+    const tabInicial = document.querySelector(`.tab-codigo[data-tab="${tabGuardada}"]`);
+    const panelInicial = document.querySelector(`.panel-codigo[data-content="${tabGuardada}"]`);
+
+    if (tabInicial && panelInicial) {
+      desactivarTabsYPaneles(tabs, paneles);
+      tabInicial.classList.add('activa');
+      panelInicial.classList.add('activo');
+    }
+  }
+}
+
+function desactivarTabsYPaneles(tabs, paneles) {
+  tabs.forEach((tab) => tab.classList.remove('activa'));
+  paneles.forEach((panel) => panel.classList.remove('activo'));
+}
+async function cargarCodigoReal() {
+  const archivos = [
+    { ruta: 'index.html', id: 'codigo-html' },
+    { ruta: 'style.css', id: 'codigo-css' },
+    { ruta: 'app.js', id: 'codigo-js' },
+  ];
+
+  for (const archivo of archivos) {
+    const contenedor = document.getElementById(archivo.id);
+
+    if (!contenedor) continue;
+
+    try {
+      const respuesta = await fetch(archivo.ruta);
+
+      if (!respuesta.ok) {
+        throw new Error(`No se pudo cargar ${archivo.ruta}`);
+      }
+
+      const texto = await respuesta.text();
+      contenedor.textContent = texto;
+    } catch (error) {
+      contenedor.textContent = `Error al cargar ${archivo.ruta}`;
+      console.error(error);
+    }
+  }
+}

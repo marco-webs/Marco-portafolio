@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marco Jiménez — Portafolio</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -24,6 +26,7 @@
         <nav class="nav">
           <a href="#sobre-mi">Sobre mí</a>
           <a href="#proyectos">Proyectos</a>
+          <a href="#codigo-portafolio" class="link-codigo-top">Código</a>
           <a href="#contacto">Contacto</a>
         </nav>
       </div>
@@ -63,6 +66,7 @@
           <h2>Proyectos</h2>
           <p class="texto-seccion">Trabajos y prácticas con enfoque real</p>
         </div>
+
         <div class="projects-grid">
           <a href="proyectos/Web_Comercial/index.html" class="project-card">
             <span class="tag">Nuevo</span>
@@ -90,6 +94,16 @@
             </p>
           </a>
 
+          <a href="./proyectos/Beauty_Venus_Propuesta/index.html" class="project-card">
+            <span class="tag">🔥 Beauty Venus Propuesta</span>
+
+            <h3>Beauty Venus Propuesta</h3>
+            <p>
+              Rediseño completo enfocado a conversión, experiencia móvil y mejora visual para
+              cliente real.
+            </p>
+          </a>
+
           <a href="./ejercicios/javascript/Contador_Portafolio/index.html" class="project-card">
             <span class="tag">JavaScript</span>
             <h3>Contador Interactivo</h3>
@@ -109,6 +123,41 @@
           </a>
         </div>
       </section>
+
+      <section id="codigo-portafolio" class="contenedor seccion visor-portafolio">
+        <div class="header-seccion">
+          <h2>Código del portafolio</h2>
+          <p class="texto-seccion">
+            Vista general y acceso rápido a la estructura base del HTML, CSS y JavaScript.
+          </p>
+        </div>
+
+        <div class="tabs-codigo">
+          <button class="tab-codigo activa" data-tab="vista" type="button">Vista</button>
+          <button class="tab-codigo" data-tab="html" type="button">HTML</button>
+          <button class="tab-codigo" data-tab="css" type="button">CSS</button>
+          <button class="tab-codigo" data-tab="js" type="button">JS</button>
+        </div>
+
+        <div class="panel-codigo panel-preview activo" data-content="vista">
+          <p>
+            Esta sección muestra una vista resumida del código del portafolio. Las pestañas permiten
+            consultar la estructura general de HTML, los estilos principales en CSS y la lógica base
+            en JavaScript.
+          </p>
+        </div>
+        <div class="panel-codigo" data-content="html">
+          <pre><code id="codigo-html">Cargando HTML...</code></pre>
+        </div>
+
+        <div class="panel-codigo" data-content="css">
+          <pre><code id="codigo-css">Cargando CSS...</code></pre>
+        </div>
+
+        <div class="panel-codigo" data-content="js">
+          <pre><code id="codigo-js">Cargando JavaScript...</code></pre>
+        </div>
+      </section>
     </main>
 
     <footer id="contacto" class="footer">
@@ -123,6 +172,7 @@
           <ul>
             <li><a href="#sobre-mi">Sobre mí</a></li>
             <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#codigo-portafolio">Código</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </div>
