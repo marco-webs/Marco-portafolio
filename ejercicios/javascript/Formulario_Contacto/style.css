@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #222;
+}
+
+.contenedor {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+h1 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.grupo-formulario {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error {
+  min-height: 20px;
+  margin: 6px 0 0;
+  color: red;
+  font-size: 14px;
+}
+
+#mensajeExito {
+  min-height: 24px;
+  margin-top: 16px;
+  font-weight: bold;
+  color: green;
+  text-align: center;
+}
+input.valido,
+textarea.valido {
+  border: 2px solid green;
+}
+
+input.invalido,
+textarea.invalido {
+  border: 2px solid red;
+}
+#contadorMensaje {
+  font-size: 14px;
+  margin-top: 4px;
+  color: #666;
+  text-align: right;
+}
+
+.limite {
+  color: red;
+}

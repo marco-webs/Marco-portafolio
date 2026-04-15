@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de contacto</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="contenedor">
+      <h1 id="titulo">Formulario de contacto</h1>
+
+      <form id="formulario" novalidate>
+        <div class="grupo-formulario">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" placeholder="Escribe tu nombre" />
+          <p class="error" id="errorNombre"></p>
+        </div>
+
+        <div class="grupo-formulario">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" placeholder="Escribe tu correo" />
+          <p class="error" id="errorCorreo"></p>
+        </div>
+
+        <div class="grupo-formulario">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" rows="5" placeholder="Escribe tu mensaje"></textarea>
+          <p id="contadorMensaje">0 / 200</p>
+          <p class="error" id="errorMensaje"></p>
+        </div>
+
+        <button type="submit" id="botonEnviar">Enviar</button>
+        <p id="mensajeExito"></p>
+      </form>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
